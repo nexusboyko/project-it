@@ -12,3 +12,7 @@ export async function loadProject() {
 
   return project;
 }
+
+export async function loadProjects() {
+  // const projects = await 
+}
