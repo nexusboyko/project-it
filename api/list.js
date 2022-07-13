@@ -1,7 +1,7 @@
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
-import { loadList, loadListItem } from './redis/client.js';
+import { getItemCount, loadItemJson, loadList, loadListItem } from './redis/client.js';
 
 const app = express();
 app.use(cors());
@@ -11,13 +11,14 @@ app.use(bodyParser.json());
 app.get('/api/list', async (req, res) => {
   try {
     const items = [];
+    const numItems = await getItemCount();
 
-    let i = 0;
-    do {
-      const listItem = await loadListItem(i);
+    for(let i = 0; i < numItems; i++) {
+      const listItemId = await loadListItem(i);
+      const listItem = await loadItemJson(listItemId);
       items.push(listItem);
-      i++;
-    } while (i < 2);
+    }
+    items.reverse();
 
     res.header('Content-Type', 'application/json');
     res.send(items);

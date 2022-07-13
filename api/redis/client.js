@@ -18,10 +18,11 @@ export const zremAsync = promisify(client.zrem).bind(client);
 export const zscoreAsync = promisify(client.zscore).bind(client);
 export const zrevrangeAsync = promisify(client.zrevrange).bind(client);
 export const zrangeAsync = promisify(client.zrevrange).bind(client);
+export const zcountAsync = promisify(client.zcount).bind(client);
 
-export async function loadProject() {
-  const project = await jsongetAsync('card');
-  return project;
+export async function getItemCount() {
+  const count = await zcountAsync('cards', '-inf', 'inf');
+  return count;
 }
 
 export async function loadList() {
@@ -30,7 +31,7 @@ export async function loadList() {
 }
 
 export async function loadListItem(index) {
-  const listItem = await zrevrangeAsync('cards', index, index);
+  const listItem = await zrangeAsync('cards', index, index);
   return listItem;
 }
 
