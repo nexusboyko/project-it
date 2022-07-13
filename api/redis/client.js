@@ -21,18 +21,20 @@ export const zrangeAsync = promisify(client.zrevrange).bind(client);
 
 export async function loadProject() {
   const project = await jsongetAsync('card');
-
   return project;
 }
 
-// Load item from a Redis list,
-// then get the associated JSON and return it
 export async function loadList() {
-  const list = await zrevrangeAsync('cards', 0, -1);
+  const list = await zrangeAsync('cards', 0, -1);
   return list;
 }
 
 export async function loadListItem(index) {
-  const listItem = await zrangeAsync('cards', index, index);
+  const listItem = await zrevrangeAsync('cards', index, index);
   return listItem;
+}
+
+export async function loadItemJson(id) {
+  const item = await jsongetAsync(id);
+  return item;
 }

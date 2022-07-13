@@ -1,40 +1,40 @@
-import React from "react";
-import { render } from "react-dom";
+import React from 'react';
+import { render } from 'react-dom';
 
-import Head from "next/head";
-import CardsContainer from "../components/CardsContainer.js";
+import Head from 'next/head';
+import CardsContainer from '../components/CardsContainer.js';
 
 const CARDS = [
   {
     id: 1,
-    img: "https://picsum.photos/1000",
-    title: "Card 1",
-    desc: "Sample Text 1",
-    author: "Author 1",
+    img: 'https://picsum.photos/1000',
+    title: 'Card 1',
+    desc: 'Sample Text 1',
+    author: 'Author 1',
     full: false,
   },
   {
     id: 2,
-    img: "https://picsum.photos/1300",
-    title: "Card 2",
-    desc: "Sample Text 2",
-    author: "Author 2",
+    img: 'https://picsum.photos/1300',
+    title: 'Card 2',
+    desc: 'Sample Text 2',
+    author: 'Author 2',
     full: true,
   },
   {
     id: 3,
-    img: "https://picsum.photos/1100",
-    title: "Card 3",
-    desc: "Sample Text 3",
-    author: "Author 3",
+    img: 'https://picsum.photos/1100',
+    title: 'Card 3',
+    desc: 'Sample Text 3',
+    author: 'Author 3',
     full: true,
   },
   {
     id: 4,
-    img: "https://picsum.photos/1500",
-    title: "Card 4",
-    desc: "Sample Text 4",
-    author: "Author 4",
+    img: 'https://picsum.photos/1500',
+    title: 'Card 4',
+    desc: 'Sample Text 4',
+    author: 'Author 4',
     full: false,
   },
 ];
@@ -48,7 +48,7 @@ function Home() {
         <link rel="icon" href="/project-it-image.png" />
       </Head>
 
-      <main className="p-3 mx-auto" style={{ maxWidth: "90rem" }}>
+      <main className="p-3 mx-auto" style={{ maxWidth: '90rem' }}>
         <CardsContainer cards={CARDS} />
       </main>
     </>

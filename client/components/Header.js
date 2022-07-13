@@ -35,6 +35,22 @@ class Header extends React.Component {
             role="tablist"
           >
             <li className="nav-item" role="presentation">
+              <Link href="/cards">
+                <button
+                  className="nav-link"
+                  id="pills-contact-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-contact"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-contact"
+                  aria-selected="false"
+                >
+                  Cards
+                </button>
+              </Link>
+            </li>
+            <li className="nav-item" role="presentation">
               <Link href="/">
                 <button
                   className="nav-link active"
@@ -81,9 +97,6 @@ class Header extends React.Component {
                   About
                 </button>
               </Link>
-            </li>
-            <li className="nav-item">
-              
             </li>
           </ul>
 
