@@ -49,7 +49,7 @@ function Home() {
       </Head>
 
       <main className="p-3 mx-auto" style={{ maxWidth: '90rem' }}>
-        <CardsContainer cards={CARDS} />
+        <h1 className="display-4 fs-1">Home</h1>
       </main>
     </>
   );
