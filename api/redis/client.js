@@ -39,3 +39,11 @@ export async function loadItemJson(id) {
   const item = await jsongetAsync(id);
   return item;
 }
+
+export async function addItemJson(id, item) {
+  await jsonsetAsync(id, '$', item);
+}
+
+export async function addItemID(id) {
+  await zaddAsync('cards', id, id);
+}
