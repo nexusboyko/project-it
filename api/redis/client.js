@@ -45,5 +45,5 @@ export async function addItemJson(id, item) {
 }
 
 export async function addItemID(id) {
-  await zaddAsync('cards', id, id);
+  await zaddAsync('cards', Math.round(Date.now() / 1000), id);
 }
