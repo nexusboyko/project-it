@@ -79,13 +79,7 @@ function Cards() {
       <main className='p-3 mx-auto' style={{ maxWidth: '90rem' }}>
         <h1 className='display-4 fs-1'>Cards</h1>
 
-        <CardsContainer cards={cards} />
-
-        <div className='text-center p-5'>
-          <button className='btn btn-primary' onClick={createCard}>
-            <strong>Add card</strong>
-          </button>
-        </div>
+        {/* <CardsContainer cards={cards} /> */}
 
         <button
           type='button'

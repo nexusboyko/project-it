@@ -21,17 +21,17 @@ export const zrangeAsync = promisify(client.zrevrange).bind(client);
 export const zcountAsync = promisify(client.zcount).bind(client);
 
 export async function getItemCount() {
-  const count = await zcountAsync('cards', '-inf', 'inf');
+  const count = await zcountAsync('items', '-inf', 'inf');
   return count;
 }
 
 export async function loadList() {
-  const list = await zrangeAsync('cards', 0, -1);
+  const list = await zrangeAsync('items', 0, -1);
   return list;
 }
 
 export async function loadListItem(index) {
-  const listItem = await zrangeAsync('cards', index, index);
+  const listItem = await zrangeAsync('items', index, index);
   return listItem;
 }
 
@@ -45,5 +45,5 @@ export async function addItemJson(id, item) {
 }
 
 export async function addItemID(id) {
-  await zaddAsync('cards', Math.round(Date.now() / 1000), id);
+  await zaddAsync('items', Math.round(Date.now() / 1000), id);
 }
