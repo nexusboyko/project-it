@@ -1,20 +1,68 @@
-import bodyParser from "body-parser";
-import cors from "cors";
-import express from "express";
-import { loadProject } from "./redis/client.js";
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import express from 'express';
+import { addItemJson, addItemID, loadListItem, loadItemJson, getItemCount } from './redis/client.js';
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// Defines path to where data is sent
-app.get("/api/projects", async (req, res) => {
+/*
+ *  Get public projects list
+ */
+app.get('/api/public/projects', async (req, res) => {
+  console.log('REQUEST: ' + req.method);
   try {
-    const project = await loadProject();
-    res.header("Content-Type", "application/json");
-    res.send(JSON.stringify(project));
+    const items = [];
+    const numItems = await getItemCount();
+
+    for (let i = 0; i < numItems; i++) {
+      const listItemId = await loadListItem(i);
+      const listItem = await loadItemJson(listItemId);
+      items.push(listItem);
+    }
+    items.reverse();
+
+    res.header('Content-Type', 'application/json');
+    res.send(items);
   } catch (error) {
-    logErrorMessage(userInfo, error);
+    // logErrorMessage(userInfo, error);
+    res.sendStatus(500);
+  }
+});
+
+/*
+ *  Add single card item to projects list
+ */
+app.post('/api/public/projects', async (req, res) => {
+  console.log('REQUEST: ' + req.method);
+  console.log('ITEM POSTED:', req.body);
+  console.log('ITEM STRING:', JSON.stringify(req.body));
+  try {
+    addItemJson(req.body.id, JSON.stringify(req.body));
+    addItemID(req.body.id);
+
+    res.header('Content-Type', 'application/json');
+    res.send(req.body);
+  } catch (error) {
+    // logErrorMessage(userInfo, error);
+    res.sendStatus(500);
+  }
+});
+
+/*
+ *  Get single card item
+ */
+app.get('/api/card', async (req, res) => {
+  try {
+    const id = await loadListItem(0);
+    const item = await loadItemJson(id);
+
+    res.header('Content-Type', 'application/json');
+    res.send(JSON.stringify(item));
+  } catch (error) {
+    // logErrorMessage(userInfo, error);
     res.sendStatus(500);
   }
 });
