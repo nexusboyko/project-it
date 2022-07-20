@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import Link from 'next/link';
 import { customAlphabet } from 'nanoid';
 
 const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz', 10);
@@ -13,34 +14,37 @@ async function createCard(props) {
     author: 'Anonymous',
     full: false,
   };
-  const newCard = getCardFormData();
+  const newCard = convertFormToCard();
   const card = Object.assign({}, defaultCard, newCard);
 
   Object.keys(card).forEach(
     (k) => (card[k] = card[k] === '' ? defaultCard[k] : card[k])
   );
-  console.log(card);
 
-  // try {
-  //   const res = await fetch('http://localhost:3001/api/list', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(card),
-  //   });
-  // } catch (error) {
-  //   console.log(error);
-  // }
+  console.log(card);
+  console.log(JSON.stringify(card));
+
+  try {
+    const res = await fetch('http://localhost:3001/api/public/projects', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(card),
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-function getCardFormData() {
+function convertFormToCard() {
   const data = Array.from(
     document.querySelectorAll('#newCardForm input')
   ).reduce((acc, input) => ({ ...acc, [input.id]: input.value }), {});
+  
   const desc = document.querySelector('#newCardForm textarea');
   const full = document.querySelector('#full');
-  const img = document.querySelector('#img');
+  // const img = document.querySelector('#img');
 
   data['desc'] = desc.value;
   data['id'] = nanoid();
@@ -105,9 +109,15 @@ function newCard() {
             <label className='form-check-label'>Full</label>
           </div>
         </form>
-        <button type='submit' className='btn btn-primary' onClick={createCard}>
-          <strong>Create card</strong>
-        </button>
+        <Link href='/cards'>
+          <button
+            type='submit'
+            className='btn btn-primary'
+            onClick={createCard}
+          >
+            <strong>Create card</strong>
+          </button>
+        </Link>
       </div>
     </>
   );
