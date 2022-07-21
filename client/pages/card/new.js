@@ -50,6 +50,7 @@ function convertFormToCard() {
   data['id'] = nanoid();
   data['full'] = full.checked;
   // TODO: Convert uploaded image file to URL that can also be displayed
+  data['date'] = new Date();
 
   return data;
 }

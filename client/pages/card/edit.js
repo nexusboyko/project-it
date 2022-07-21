@@ -1,17 +1,18 @@
 import React from 'react';
 import Link from 'next/link';
-import { customAlphabet } from 'nanoid';
 
-const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz', 10);
-
-// create card and upload to Redis database
+// edit card and update in Redis database
 async function updateCard(props) {
-  // const oldCard = 
+  /*
+   *  DISPLAY OLD CARD CONTENTS IN THE FORM, WHICH CAN THEN BE EDITED
+   */
+
+  // const oldCard =
   const newCard = getCardFormData();
   const card = Object.assign({}, oldCard, newCard);
 
   try {
-    const res = await fetch('http://localhost:3001/api/public/projects', {
+    const res = await fetch('http://localhost:3001/api/card', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -34,6 +35,7 @@ function getCardFormData() {
   data['desc'] = desc.value;
   data['full'] = full.checked;
   // TODO: Convert uploaded image file to URL that can also be displayed
+  data['date'] = new Date();
 
   return data;
 }
