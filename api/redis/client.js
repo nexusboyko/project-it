@@ -6,6 +6,7 @@ rejson(redis);
 export const client = redis.createClient();
 export const jsonsetAsync = promisify(client.json_set).bind(client);
 export const jsongetAsync = promisify(client.json_get).bind(client);
+export const jsondelAsync = promisify(client.json_del).bind(client);
 
 export const smembersAsync = promisify(client.smembers).bind(client);
 export const saddAsync = promisify(client.sadd).bind(client);
@@ -46,4 +47,12 @@ export async function addItemJson(id, item) {
 
 export async function addItemID(id) {
   await zaddAsync('items', Math.round(Date.now() / 1000), id);
+}
+
+export async function delItemID(id) {
+  await zremAsync('items', id);
+}
+
+export async function delItemJson(id) {
+  await jsondelAsync(id);
 }
