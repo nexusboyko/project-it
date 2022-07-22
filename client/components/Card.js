@@ -39,7 +39,6 @@ function getCardFormData() {
   return data;
 }
 
-
 // delete card from Redis database
 async function deleteCard(id) {
   try {
@@ -57,8 +56,7 @@ async function deleteCard(id) {
 
 function Card(props) {
   const { id, img, title, desc, author, full, date } = props;
-
-  console.log(Date.parse(date.toString()));
+  const time = new Date(date);
 
   return (
     <>
@@ -224,7 +222,7 @@ function Card(props) {
                     <i className='bi bi-clock'></i>
                   </small>
                   <small className='text-muted'>
-                    Last updated {date.toString()}
+                    Last updated {time.toLocaleDateString()} at {time.toLocaleTimeString()}
                   </small>
                 </p>
 
