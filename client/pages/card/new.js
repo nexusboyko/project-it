@@ -113,10 +113,18 @@ function newCard() {
         <Link href='/cards'>
           <button
             type='submit'
-            className='btn btn-primary'
+            className='btn btn-primary me-2'
             onClick={createCard}
           >
             <strong>Create card</strong>
+          </button>
+        </Link>
+        <Link href='/cards'>
+          <button
+            type='submit'
+            className='btn btn-secondary'
+          >
+            <strong>Discard</strong>
           </button>
         </Link>
       </div>
