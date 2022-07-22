@@ -16,12 +16,13 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// LIST FUNCTIONS
+
 /*
  *  Get public projects list
  *  Returns an array of JSON item strings
  */
 app.get('/api/public/projects', async (req, res) => {
-  console.log('REQUEST: ' + req.method);
   try {
     const items = [];
     const numItems = await getItemCount();
@@ -45,9 +46,6 @@ app.get('/api/public/projects', async (req, res) => {
  *  Add single card item to projects list
  */
 app.post('/api/public/projects', async (req, res) => {
-  console.log('REQUEST: ' + req.method);
-  console.log('ITEM POSTED:', req.body);
-  console.log('ITEM STRING:', JSON.stringify(req.body));
   try {
     addItemJson(req.body.id, JSON.stringify(req.body));
     addItemID(req.body.id);
@@ -59,6 +57,8 @@ app.post('/api/public/projects', async (req, res) => {
     res.sendStatus(500);
   }
 });
+
+// SINGLE ITEM FUNCTIONS
 
 /*
  *  Get single card item
@@ -80,9 +80,6 @@ app.get('/api/card', async (req, res) => {
  *  Edit single card item
  */
 app.put('/api/card', async (req, res) => {
-  console.log('REQUEST: ' + req.method);
-  console.log('ITEM UPDATED TO:', req.body);
-  console.log('NEW ITEM STRING:', JSON.stringify(req.body));
   try {
     addItemJson(req.body.id, JSON.stringify(req.body));
 
@@ -98,8 +95,6 @@ app.put('/api/card', async (req, res) => {
  *  Delete single card item
  */
 app.delete('/api/card', async (req, res) => {
-  console.log('REQUEST: ' + req.method);
-  console.log('ITEM ID DELTED:', req.body);
   try {
     delItemID(req.body.id);
     delItemJson(req.body.id);

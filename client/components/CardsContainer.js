@@ -13,7 +13,7 @@ function CardsContainer(props) {
       desc={card.desc}
       author={card.author}
       full={card.full}
-      date={new Date()}
+      date={card.date}
     />
   ));
 

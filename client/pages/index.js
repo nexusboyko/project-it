@@ -1,8 +1,5 @@
 import React from 'react';
-import { render } from 'react-dom';
-
 import Head from 'next/head';
-import CardsContainer from '../components/CardsContainer.js';
 
 const CARDS = [
   {
