@@ -1,57 +1,47 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 class Header extends React.Component {
   render() {
     return (
       <>
-        <div
-          className="d-flex justify-content-between align-items-center border rounded-bottom mx-auto p-3"
-          style={{ maxWidth: '90rem' }}
-        >
-          <Image
-            src="/project-it-image-logo.svg"
-            alt="Image Logo"
-            width={40}
-            height={40}
-            className="p-0 m-0"
-          />
+        <div className='d-flex justify-content-center align-items-center mt-5'>
+          <div className='me-3'>
+            <Link href={'/'} className='m-0 p-0'>
+              <Image
+                src='/project-it-image-logo.svg'
+                alt='Image Logo'
+                width={50}
+                height={50}
+                className='m-0 p-0'
+                type='button'
+              />
+            </Link>
+          </div>
 
-          <ul className="nav nav-pills" id="pills-tab" role="tablist">
-            <li className="nav-item" role="presentation">
-              <Link href="/">
-                <button
-                  className="nav-link active"
-                  id="pills-home-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-home"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-home"
-                  aria-selected="true"
-                >
-                  Home
-                </button>
-              </Link>
-            </li>
-            <li className="nav-item" role="presentation">
-              <Link href="/cards">
-                <button
-                  className="nav-link"
-                  id="pills-contact-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-contact"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-contact"
-                  aria-selected="false"
-                >
-                  Cards
-                </button>
-              </Link>
-            </li>
-          </ul>
+          <div className='d-flex align-items-center justify-content-center'>
+            <ul className='nav nav-pills'>
+              <li className='nav-item'>
+                <Link href={'/'}>
+                  <a className='nav-link' href='#'>
+                    Home
+                  </a>
+                </Link>
+              </li>
+              <li className='nav-item'>
+                <Link href={'/cards'}>
+                  <a className='nav-link' href='#'>Projects</a>
+                </Link>
+              </li>
+              <li className='nav-item'>
+                <Link href={'#'}>
+                  <a className='nav-link disabled' href='#'>Profile</a>
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
       </>
     );
