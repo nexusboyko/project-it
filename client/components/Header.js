@@ -11,7 +11,7 @@ class Header extends React.Component {
           <div className='me-3'>
             <Link href={'/'} className='m-0 p-0'>
               <Image
-                src='/project-it-image-logo.svg'
+                src='/logo-main.svg'
                 alt='Image Logo'
                 width={50}
                 height={50}
