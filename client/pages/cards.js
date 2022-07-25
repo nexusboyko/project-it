@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Head from 'next/head';
 import CardsContainer from '../components/CardsContainer';
 
 function Cards() {
@@ -31,6 +32,11 @@ function Cards() {
 
   return (
     <>
+      <Head>
+        <title>Projects</title>
+        <meta name='description' content='Public projects list' />
+        <link rel='icon' href='/main.ico' />
+      </Head>
       <main className='p-3 mx-auto' style={{ maxWidth: '90rem' }}>
         <div
           id='info'
