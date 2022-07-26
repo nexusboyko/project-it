@@ -1,34 +1,28 @@
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
+// import './redis/client.js';
+import { addItemID, getItemCount, delItemID } from './redis/list.js';
 import {
   addItemJson,
-  addItemID,
-  loadListItem,
-  loadItemJson,
-  getItemCount,
-  delItemID,
   delItemJson,
-} from './redis/client.js';
+  loadItemId,
+  loadItemJson,
+} from './redis/item.js';
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// LIST FUNCTIONS
-
-/*
- *  Get public projects list
- *  Returns an array of JSON item strings
- */
+// get all item IDs from a list
 app.get('/api/public/projects', async (req, res) => {
   try {
     const items = [];
     const numItems = await getItemCount();
 
     for (let i = 0; i < numItems; i++) {
-      const listItemId = await loadListItem(i);
+      const listItemId = await loadItemId(i);
       const listItem = await loadItemJson(listItemId);
       items.push(listItem);
     }

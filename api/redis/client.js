@@ -20,39 +20,3 @@ export const zscoreAsync = promisify(client.zscore).bind(client);
 export const zrevrangeAsync = promisify(client.zrevrange).bind(client);
 export const zrangeAsync = promisify(client.zrevrange).bind(client);
 export const zcountAsync = promisify(client.zcount).bind(client);
-
-export async function getItemCount() {
-  const count = await zcountAsync('items', '-inf', 'inf');
-  return count;
-}
-
-export async function loadList() {
-  const list = await zrangeAsync('items', 0, -1);
-  return list;
-}
-
-export async function loadListItem(index) {
-  const listItem = await zrangeAsync('items', index, index);
-  return listItem;
-}
-
-export async function loadItemJson(id) {
-  const item = await jsongetAsync(id);
-  return item;
-}
-
-export async function addItemJson(id, item) {
-  await jsonsetAsync(id, '$', item);
-}
-
-export async function addItemID(id) {
-  await zaddAsync('items', Math.round(Date.now() / 1000), id);
-}
-
-export async function delItemID(id) {
-  await zremAsync('items', id);
-}
-
-export async function delItemJson(id) {
-  await jsondelAsync(id);
-}
