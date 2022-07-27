@@ -1,0 +1,13 @@
+$theme-colors: (
+  "primary": #008077,
+);
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
+
+$font-family-sans-serif: 'Inter', sans-serif;
+
+// body {
+//   font-family: 'Poppins', sans-serif !important;
+// }
+
+@import '/node_modules/bootstrap/scss/bootstrap.scss';
