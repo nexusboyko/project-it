@@ -8,33 +8,30 @@ class Header extends React.Component {
     return (
       <>
         <div className='container px-5 d-flex-row text-center mt-5'>
-          <div className='me-3'>
-            <Link href={'/'} className='m-0 p-0'>
-              <Image
-                src='/main.svg'
-                alt='Image Logo'
-                width={40}
-                height={40}
-                className='m-0 p-0'
-                type='button'
-              />
-            </Link>
+          <div className=''>
+            <Image
+              src='/main.svg'
+              alt='Image Logo'
+              width={40}
+              height={40}
+              className='m-0 p-0'
+            />
           </div>
 
-          <div class='btn-group mt-2'>
-            <Link href={'/'}>
-              <button type='button' class='btn active'>
-                Home
+          <div className='btn-group mt-2'>
+            <Link href='/'>
+              <button type='button' className='btn active'>
+                <strong>Home</strong>
               </button>
             </Link>
-            <Link href={'/cards'}>
-              <button type='button' class='btn active'>
-                Projects
+            <Link href='/projects'>
+              <button type='button' className='btn active'>
+                <strong>Projects</strong>
               </button>
             </Link>
-            <Link href={'/'}>
-              <button type='button' class='btn disabled'>
-                Profile
+            <Link href='/'>
+              <button type='button' className='btn disabled'>
+                <strong>Profile</strong>
               </button>
             </Link>
           </div>

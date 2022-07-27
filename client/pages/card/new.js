@@ -96,7 +96,7 @@ function newCard() {
               className='form-control'
               placeholder='New description'
               id='desc'
-              style={{ maxHeight: '25ch' }}
+              style={{ minHeight: '25ch' }}
             ></textarea>
             <label>Description</label>
           </div>
@@ -110,7 +110,7 @@ function newCard() {
             <label className='form-check-label'>Full</label>
           </div>
         </form>
-        <Link href='/cards'>
+        <Link href='/projects'>
           <button
             type='submit'
             className='btn btn-primary me-2'
@@ -119,7 +119,7 @@ function newCard() {
             <strong>Create card</strong>
           </button>
         </Link>
-        <Link href='/cards'>
+        <Link href='/projects'>
           <button
             type='submit'
             className='btn btn-secondary'

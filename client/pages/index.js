@@ -21,10 +21,10 @@ function Home() {
           </h4>
           <p className='fs-3 mb-5'>Get started by viewing public projects.</p>
 
-          <Link href='/cards'>
-            <button className='btn btn-lg btn-primary'>
+          <Link href='/projects'>
+            <button className='btn btn-sm btn-primary'>
               <strong>
-                <i className='bi bi-collection text-white'></i> Projects
+                Projects
               </strong>
             </button>
           </Link>
