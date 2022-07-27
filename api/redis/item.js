@@ -1,6 +1,6 @@
-import { zrangeAsync, jsongetAsync } from './client.js';
+import { zrangeAsync, jsongetAsync, jsonsetAsync, jsondelAsync } from './client.js';
 
-// load item at index pos
+// load item at index position
 export async function loadItemId(index) {
   const listItem = await zrangeAsync('items', index, index);
   return listItem;

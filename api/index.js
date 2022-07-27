@@ -2,7 +2,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
 // import './redis/client.js';
-import { addItemID, getItemCount, delItemID } from './redis/list.js';
+import { loadList, addItemID, getItemCount, delItemID } from './redis/list.js';
 import {
   addItemJson,
   delItemJson,
@@ -19,19 +19,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/api/public/projects', async (req, res) => {
   try {
     const items = [];
-    const numItems = await getItemCount();
-
-    for (let i = 0; i < numItems; i++) {
-      const listItemId = await loadItemId(i);
-      const listItem = await loadItemJson(listItemId);
-      items.push(listItem);
+    const list = await loadList();
+    
+    for (let i = 0; i < list.length; i++) {
+      const item = await loadItemJson(list[i]);
+      items.push(JSON.parse(item));
     }
-    items.reverse();
-
     res.header('Content-Type', 'application/json');
     res.send(items);
   } catch (error) {
-    // logErrorMessage(userInfo, error);
     res.sendStatus(500);
   }
 });
@@ -47,7 +43,6 @@ app.post('/api/public/projects', async (req, res) => {
     res.header('Content-Type', 'application/json');
     res.send(req.body);
   } catch (error) {
-    // logErrorMessage(userInfo, error);
     res.sendStatus(500);
   }
 });
@@ -55,17 +50,17 @@ app.post('/api/public/projects', async (req, res) => {
 // SINGLE ITEM FUNCTIONS
 
 /*
- *  Get single card item
+ *  Get single card item given ID
  */
 app.get('/api/card', async (req, res) => {
+  const id = req.body.id;
+
   try {
-    const id = await loadListItem(0);
     const item = await loadItemJson(id);
 
     res.header('Content-Type', 'application/json');
-    res.send(JSON.stringify(item));
+    res.send(JSON.parse(item));
   } catch (error) {
-    // logErrorMessage(userInfo, error);
     res.sendStatus(500);
   }
 });
@@ -80,7 +75,6 @@ app.put('/api/card', async (req, res) => {
     res.header('Content-Type', 'application/json');
     res.send(req.body);
   } catch (error) {
-    // logErrorMessage(userInfo, error);
     res.sendStatus(500);
   }
 });
@@ -96,7 +90,6 @@ app.delete('/api/card', async (req, res) => {
     res.header('Content-Type', 'application/json');
     res.send(req.body.id);
   } catch (error) {
-    // logErrorMessage(userInfo, error);
     res.sendStatus(500);
   }
 });
