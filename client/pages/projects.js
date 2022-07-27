@@ -5,7 +5,6 @@ import CardsContainer from '../components/CardsContainer';
 
 function Cards() {
   const [items, setItems] = useState([]);
-  const cards = [];
 
   // fetch cards from database on first page load
   useEffect(() => {
@@ -26,10 +25,6 @@ function Cards() {
       );
   }, []);
 
-  items.forEach((item) => {
-    cards.push(JSON.parse(item));
-  });
-
   return (
     <>
       <Head>
@@ -38,30 +33,10 @@ function Cards() {
         <link rel='icon' href='/main.ico' />
       </Head>
       <main className='p-3 mx-auto' style={{ maxWidth: '90rem' }}>
-        <div
-          id='info'
-          className='container d-flex flex-column align-items-center justify-content-center my-4'
-        >
-          <h4 className='display-5 mb-4'>
-            These are <strong>public</strong> projects.
-          </h4>
-          <p className='fs-4 text-center'>
-            Each project has its own set of basic information, along with <br />{' '}
-            an indicator marking if that project is <i>open</i> or <i>closed</i>{' '}
-            to new members.
-          </p>
-
-          <p className='fs-4 m-0'>
-            To add your own project, click on the{' '}
-            <button className='btn btn-sm border-dark disabled'>
-              Add project
-            </button>{' '}
-            button.
-          </p>
-
+        <div className='d-flex justify-content-center py-3'>
           <Link href='/card/new'>
             <button
-              className='btn btn-lg btn-primary text-white m-3'
+              className='btn btn-sm btn-primary text-white m-3'
               type='button'
             >
               <strong>Add project</strong>
@@ -69,9 +44,7 @@ function Cards() {
           </Link>
         </div>
 
-        <hr className='mb-4 pb-2' />
-
-        <CardsContainer cards={cards} />
+        <CardsContainer cards={items} />
       </main>
     </>
   );

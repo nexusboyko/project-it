@@ -39,6 +39,65 @@ function getCardFormData() {
   return data;
 }
 
+function generateFormFromExistingData(props) {
+  document.getElementById('newCardForm').innerHTML = `
+  <div class='mb-3'>
+    <label>Image</label>
+    <input
+      class='form-control form-floating'
+      type='file'
+      id='img'
+      accept='image/png, image/jpg, image/jpeg'
+    ></input>
+  </div>
+
+  <div class='form-floating mb-3'>
+    <input
+      type='title'
+      class='form-control'
+      id='title'
+      placeholder='New title'
+      value='${props.title}'
+    ></input>
+    <label>Title</label>
+  </div>
+
+  <div class='form-floating mb-3'>
+    <input
+      type='author'
+      class='form-control'
+      id='author'
+      placeholder='New title'
+      value='${props.author}'
+    ></input>
+    <label>Author</label>
+  </div>
+
+  <div class='form-floating mb-3'>
+    <textarea
+      type='desc'
+      class='form-control'
+      placeholder='New description'
+      id='desc'
+      style='min-height: 25ch'
+    >${props.desc}</textarea>
+    <label>Description</label>
+  </div>
+
+  <div class='form-check mb-3'>
+    <input
+      class='form-check-input'
+      type='checkbox'
+      id='full'
+      ${props.full ? 'checked' : ''}
+    ></input>
+    <label class='form-check-label'>
+      Full
+    </label>
+  </div>
+  `;
+}
+
 // delete card from Redis database
 async function deleteCard(id) {
   try {
@@ -60,7 +119,7 @@ function Card(props) {
 
   return (
     <>
-      <div className='col-6'>
+      <div className='col-lg-6 col-md-12 col-6'>
         <div className='card'>
           <div className='row g-0'>
             <div className='col-md-4 border-end'>
@@ -86,6 +145,7 @@ function Card(props) {
                         title='Edit card'
                         data-bs-toggle='modal'
                         data-bs-target='#editCard'
+                        onClick={() => generateFormFromExistingData(props)}
                       >
                         <a className='text-secondary'>
                           <i className='bi bi-pencil-fill'></i>
@@ -111,63 +171,7 @@ function Card(props) {
                               </h5>
                             </div>
                             <div className='modal-body'>
-                              <form id='newCardForm' action=''>
-                                <div className='mb-3'>
-                                  <label>Image</label>
-                                  <input
-                                    className='form-control form-floating'
-                                    type='file'
-                                    id='img'
-                                    accept='image/png, image/jpg, image/jpeg'
-                                  ></input>
-                                </div>
-
-                                <div className='form-floating mb-3'>
-                                  <input
-                                    type='title'
-                                    className='form-control'
-                                    id='title'
-                                    placeholder='New title'
-                                    defaultValue={title}
-                                  ></input>
-                                  <label>Title</label>
-                                </div>
-
-                                <div className='form-floating mb-3'>
-                                  <input
-                                    type='author'
-                                    className='form-control'
-                                    id='author'
-                                    placeholder='New title'
-                                    defaultValue={author}
-                                  ></input>
-                                  <label>Author</label>
-                                </div>
-
-                                <div className='form-floating mb-3'>
-                                  <textarea
-                                    type='desc'
-                                    className='form-control'
-                                    placeholder='New description'
-                                    defaultValue={desc}
-                                    id='desc'
-                                    style={{ maxHeight: '25ch' }}
-                                  ></textarea>
-                                  <label>Description</label>
-                                </div>
-
-                                <div className='form-check mb-3'>
-                                  <input
-                                    className='form-check-input'
-                                    type='checkbox'
-                                    id='full'
-                                    defaultChecked={full ? 'true' : 'false'}
-                                  ></input>
-                                  <label className='form-check-label'>
-                                    Full
-                                  </label>
-                                </div>
-                              </form>
+                              <form id='newCardForm' action=''></form>
                             </div>
                             <div className='modal-footer'>
                               <button
@@ -177,7 +181,7 @@ function Card(props) {
                               >
                                 <strong>Discard changes</strong>
                               </button>
-                              <Link href='/cards'>
+                              <Link href='/projects'>
                                 <button
                                   type='submit'
                                   className='btn btn-primary'
@@ -222,7 +226,8 @@ function Card(props) {
                     <i className='bi bi-clock'></i>
                   </small>
                   <small className='text-muted'>
-                    Last updated {time.toLocaleDateString()} at {time.toLocaleTimeString()}
+                    Last updated {time.toLocaleDateString()} at{' '}
+                    {time.toLocaleTimeString()}
                   </small>
                 </p>
 
