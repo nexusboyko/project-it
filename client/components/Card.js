@@ -113,6 +113,8 @@ async function deleteCard(id) {
   }
 }
 
+
+
 function Card(props) {
   const { id, img, title, desc, author, full, date } = props;
   const time = new Date(date);
@@ -125,7 +127,7 @@ function Card(props) {
             <div className='col-md-4 border-end'>
               <img
                 // src={`url(${img})`}
-                src={'https://picsum.photos/1500'}
+                src={'https://picsum.photos/' + Math.floor(Math.random() * 1500)}
                 className='img-fluid rounded-start'
                 alt='...'
               ></img>
@@ -215,7 +217,7 @@ function Card(props) {
                 <p className='card-text'>
                   <i>{author}</i>
                 </p>
-                <p className='card-text' style={{ minHeight: '10ch' }}>
+                <p className='card-text' style={{ minHeight: '10ch'}}>
                   {desc}
                 </p>
               </div>

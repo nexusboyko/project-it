@@ -23,9 +23,7 @@ function Home() {
 
           <Link href='/projects'>
             <button className='btn btn-sm btn-primary'>
-              <strong>
-                Projects
-              </strong>
+              <strong>Projects</strong>
             </button>
           </Link>
         </div>
